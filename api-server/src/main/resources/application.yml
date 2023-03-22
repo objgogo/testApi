@@ -1,0 +1,37 @@
+
+server:
+  port: 9090
+
+spring:
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher
+  datasource:
+    url: jdbc:h2:mem:kakao
+    username: kakao
+    password: 1234
+    driver-class-name: org.h2.Driver
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
+    hibernate:
+      ddl-auto: create
+    properties:
+      hibername:
+        format_sql: true
+  h2:
+    console:
+      enabled: true
+
+  swagger:
+    config:
+      enabled: true
+
+kakao:
+  key:
+    rest-api: ac56c988c672f1fbecf54db793fc833f
+
+naver:
+  key:
+    client-id: CMo5NVsteheXivTWbJI9
+    client-secret: ZRZy24w09y
+

@@ -1,0 +1,5 @@
+rootProject.name = 'api-test'
+include('api-server')
+include('batch')
+include 'common'
+

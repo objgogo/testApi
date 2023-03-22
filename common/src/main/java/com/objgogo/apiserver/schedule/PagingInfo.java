@@ -1,4 +1,4 @@
-package com.objgogo.apiserver.common;
+package com.objgogo.apiserver.schedule;
 
 import lombok.Getter;
 import lombok.Setter;

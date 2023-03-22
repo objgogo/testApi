@@ -28,7 +28,8 @@ spring:
 
 kakao:
   key:
-    rest-api: ac56c988c672f1fbecf54db793fc833f
+#    rest-api: ac56c988c672f1fbecf54db793fc833f
+    rest-api: ac56c988c672f1fbecf54db793fc833f2
 
 naver:
   key:

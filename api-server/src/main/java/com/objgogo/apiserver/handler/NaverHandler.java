@@ -2,7 +2,7 @@ package com.objgogo.apiserver.handler;
 
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.objgogo.apiserver.common.PagingInfo;
+import com.objgogo.apiserver.schedule.PagingInfo;
 import com.objgogo.apiserver.api.dto.NaverResponseMeta;
 import com.objgogo.apiserver.api.dto.ResponseItem;
 import com.objgogo.apiserver.util.SearchWordUtil;
@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -57,9 +58,9 @@ public class NaverHandler {
 
         NaverResponseMeta meta = new NaverResponseMeta();
         meta.setLastBuildDate(LocalDateTime.parse((String)rootObj.get("lastBuildDate"),DateTimeFormatter.RFC_1123_DATE_TIME));
-        meta.setStart(Integer.parseInt((String)rootObj.get("start")));
-        meta.setTotal(Integer.parseInt((String)rootObj.get("total")));
-        meta.setDisplay(Integer.parseInt((String)rootObj.get("display")));
+        meta.setStart(((Long)rootObj.get("start")).intValue());
+        meta.setTotal(((Long)rootObj.get("total")).intValue());
+        meta.setDisplay(((Long)rootObj.get("display")).intValue());
 
         JSONArray itemArrObj = (JSONArray) rootObj.get("items");
 
@@ -74,7 +75,8 @@ public class NaverHandler {
             temp.setTitle((String) itemObj.get("title"));
             temp.setContents((String) itemObj.get("description"));
             temp.setUrl((String) itemObj.get("link"));
-            temp.setDatetime(LocalDateTime.parse((String) itemObj.get("postdate"),DateTimeFormatter.ofPattern("yyyyMMdd")));
+            LocalDateTime date = LocalDateTime.parse( (String) itemObj.get("postdate")+" 00:00:00" , DateTimeFormatter.ofPattern("yyyyMMdd HH:mm:ss") );
+            temp.setDatetime(date);
 
             items.add(temp);
         }

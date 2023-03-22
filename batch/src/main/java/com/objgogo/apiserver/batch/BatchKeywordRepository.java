@@ -11,7 +11,7 @@ public interface BatchKeywordRepository extends JpaRepository<BatchKeywordEntity
 
 
     @Query(
-            "SELECT new com.objgogo.batch.KeywordRankDto(e.separationKeyword, count(e.separationKeyword))  FROM BatchKeywordEntity e GROUP BY e.separationKeyword order by e.id desc"
+            "SELECT new com.objgogo.apiserver.batch.KeywordRankDto(e.separationKeyword, count(e.separationKeyword))  FROM BatchKeywordEntity e GROUP BY e.separationKeyword order by e.id desc"
     )
     List<KeywordRankDto> getKeywordRank();
 }

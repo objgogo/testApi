@@ -1,12 +1,15 @@
 package com.objgogo.apiserver.api.controller;
 
 
+import com.objgogo.apiserver.api.dto.KeywordRankResponse;
 import com.objgogo.apiserver.api.dto.ResponseItem;
 
 import com.objgogo.apiserver.api.service.BlogSearchService;
-import com.objgogo.apiserver.common.PagingInfo;
+import com.objgogo.apiserver.schedule.PagingInfo;
 import io.swagger.annotations.Api;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @CrossOrigin("/*")
@@ -20,7 +23,6 @@ public class BlogSearchController {
         this.blogSearchService = blogSearchService;
     }
 
-
     @GetMapping("/search")
     public PagingInfo<ResponseItem> searchBlog(
             @RequestParam String query,
@@ -31,10 +33,8 @@ public class BlogSearchController {
         return blogSearchService.searchBlog(query,sort,pageNum,pageSize);
     }
 
-    @GetMapping("/test")
-    public void test(){
-        System.out.println("tqtqtqtqtqtq");
+    @GetMapping("/rank/keyword")
+    public List<KeywordRankResponse> getKeywordTop10(){
+        return blogSearchService.getKeywordTop10();
     }
-
-
 }
